@@ -21,6 +21,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.demo-page3-hide, .demo-page2-hide, .demo-page1-hide {
+    display: none;
+}
+
 .demo-icon-font:before, .demo-icon-font-24:before {
   display: inline-block;
 }

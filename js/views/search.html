@@ -6,31 +6,82 @@ and open the template in the editor.
 
 <h1>Find a Car</h1>
 
-<!--script type="text/html" id="folder_template">
-    <li data-bind="attr: {id: $data['id']">
-        <div class="container">
-            <div>
-                <strong> <span data-bind="text: $data['name']" class="oj-navigationlist-item-title"></span> </strong>
+<div class="oj-flex">
+    <div class="oj-lg-12 oj-flex-item oj-panel oj-margin">
+        <div id="listviewContainer" class="demo-container">
+            <div id="page1" class="demo-page">
+                <ul id="listviewMakes" aria-label="drill down list" 
+                    data-bind="ojComponent: {component: 'ojListView', data: dataSourceMakes, item: {template: 'make_model_template'}, optionChange: gotoModelContent}">
+                </ul>
             </div>
+            <div id="page2" class="demo-page demo-page2-hide">
+                <button id="buttonIcon2"  
+                        data-bind="click: gotoMakeList, 
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: 'Back'
+                               }">
+                </button>
+                <ul id="listviewModels" aria-label="drill down list" 
+                    data-bind="ojComponent: {component: 'ojListView', data: dataSourceModels, item: {template: 'make_model_template'}, optionChange: gotoYearContent}">
+                </ul>
+            </div>    
+            <div id="page3" class="demo-page demo-page3-hide">
+                <button id="buttonIcon2"  
+                        data-bind="click: gotoModelList, 
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: 'Back'
+                               }">
+                </button>
+                <ul id="listview" aria-label="drill down list" 
+                    data-bind="ojComponent: {component: 'ojListView', data: dataSourceYears, item: {template: 'year_template'}, optionChange: gotoStyleContent}">
+                </ul>
+            </div>    
+        </div>
+    </div>
+    <div class="oj-lg-12 oj-flex-item oj-panel oj-margin">
+        <div id="panelPage" class="oj-flex">
+            <!-- ko foreach: dataSourceStyles -->
+            <div class="oj-panel oj-panel-alt2 oj-margin">
+                <div  data-bind="ojComponent: {component: 'ojCollapsible', expanded: false}">
+                    <h5><span data-bind="text : name"></span></h5>
+                    <div> 
+                       Transmission : <span data-bind="text: transmission.transmissionType"> </span><br/>
+                       Fuel Type : <span data-bind="text: engine.fuelType"> </span><br/>
+                       Horse Power : <span data-bind="text: engine.horsepower"> </span><br/>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/html" id="make_model_template">
+    <li data-bind="attr: {id: 'item'+id}">
+        <div class="oj-flex-bar">
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div class="oj-flex-bar-middle" style="font-weight: bold" data-bind="text: name"></div>
+            </div>
+            <div class="oj-flex-bar-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+            </div>         
         </div>
     </li>
 </script>
 
-<div id="navlistdemo">
-    <div style="max-width:300px">
-        <div data-bind="ojComponent:{
-                            component:'ojNavigationList',
-                            drillMode: 'sliding',
-                            selection: selectedListItem,
-                            data : dataSource,
-                            item: { template: 'folder_template' }
-                            }">
+<script type="text/html" id="year_template">
+    <li data-bind="attr: {id: 'item'+id}">
+        <div class="oj-flex-bar">
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div class="oj-flex-bar-middle" style="font-weight: bold" data-bind="text: year"></div>
+            </div>       
         </div>
-    </div>
-    <br>
-    <div>
-        <p class="bold">Selected Car:
-            <span id="results" data-bind='text: selectedListItem'></span>
-        </p>
-    </div>
-</div-->
+    </li>
+</script>
+

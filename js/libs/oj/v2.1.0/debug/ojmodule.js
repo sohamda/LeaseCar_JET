@@ -453,10 +453,10 @@ oj.ModuleBinding.defaults =
             {
               oj.Logger.error(reason);
               // Additionally log the stack trace for the original error
-              /*if (reason instanceof Error)
+              if (reason instanceof Error)
               {
                 oj.Logger.error(reason.stack);
-              }*/
+              }
             }
             
           }.bind(null, pendingViewId)
