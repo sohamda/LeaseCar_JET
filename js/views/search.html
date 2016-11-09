@@ -4,63 +4,93 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<h1>Find a Car</h1>
+<h1>Car Finder</h1>
 
-<div class="oj-flex">
-    <div class="oj-lg-12 oj-flex-item oj-panel oj-margin">
-        <div id="listviewContainer" class="demo-container">
-            <div id="page1" class="demo-page">
-                <ul id="listviewMakes" aria-label="drill down list" 
-                    data-bind="ojComponent: {component: 'ojListView', data: dataSourceMakes, item: {template: 'make_model_template'}, optionChange: gotoModelContent}">
-                </ul>
-            </div>
-            <div id="page2" class="demo-page demo-page2-hide">
-                <button id="buttonIcon2"  
-                        data-bind="click: gotoMakeList, 
-                               ojComponent: {
-                                   component:'ojButton', 
-                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
-                                   label: 'Back'
-                               }">
-                </button>
-                <ul id="listviewModels" aria-label="drill down list" 
-                    data-bind="ojComponent: {component: 'ojListView', data: dataSourceModels, item: {template: 'make_model_template'}, optionChange: gotoYearContent}">
-                </ul>
-            </div>    
-            <div id="page3" class="demo-page demo-page3-hide">
-                <button id="buttonIcon2"  
-                        data-bind="click: gotoModelList, 
-                               ojComponent: {
-                                   component:'ojButton', 
-                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
-                                   label: 'Back'
-                               }">
-                </button>
-                <ul id="listview" aria-label="drill down list" 
-                    data-bind="ojComponent: {component: 'ojListView', data: dataSourceYears, item: {template: 'year_template'}, optionChange: gotoStyleContent}">
-                </ul>
-            </div>    
-        </div>
+<div id="something">
+    <div id="page1" class="demo-page">
+        <ul id="listviewMakes" aria-label="drill down list" 
+            data-bind="ojComponent: {component: 'ojListView', data: dataSourceMakes, item: {template: 'make_model_template'}, optionChange: gotoModelContent}">
+        </ul>
     </div>
-    <div class="oj-lg-12 oj-flex-item oj-panel oj-margin">
-        <div id="panelPage" class="oj-flex">
-            <!-- ko foreach: dataSourceStyles -->
-            <div class="oj-panel oj-panel-alt2 oj-margin">
-                <div  data-bind="ojComponent: {component: 'ojCollapsible', expanded: false}">
-                    <h5><span data-bind="text : name"></span></h5>
-                    <div> 
-                       Transmission : <span data-bind="text: transmission.transmissionType"> </span><br/>
-                       Fuel Type : <span data-bind="text: engine.fuelType"> </span><br/>
-                       Horse Power : <span data-bind="text: engine.horsepower"> </span><br/>
-                    </div>
-                </div>
-            </div>
-            <!-- /ko -->
-        </div>
-    </div>
+    <div id="page2" class="demo-page demo-page2-hide">
+        <button id="buttonIcon2" data-bind="click: gotoMakeList, 
+                                            ojComponent: {component:'ojButton', chroming: 'half', display: 'icons', icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                                            }">
+        </button>
+        <h4><span data-bind="text : selectedMakeName"></span> Models</h4>
+        <ul id="listviewModels" aria-label="drill down list" data-bind="ojComponent: {component: 'ojListView', 
+                                            data: dataSourceModels, item: {template: 'make_model_template'}, optionChange: gotoYearContent,}">
+        </ul>
+    </div>    
+    <div id="page3" class="demo-page demo-page3-hide">
+        <button id="buttonIcon2"  
+                data-bind="click: gotoModelList, ojComponent: {component:'ojButton', chroming: 'half',display: 'icons', icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}}">
+        </button>
+        <h4><span data-bind="text : selectedMakeModelName"></span> Model Years </h4>
+        <ul id="listview" aria-label="drill down list" 
+            data-bind="ojComponent: {component: 'ojListView', data: dataSourceYears, item: {template: 'year_template'}, optionChange: gotoStyleContent}">
+        </ul>
+    </div>    
+
 </div>
 
+<div id="page4">
+    <button id="buttonIcon2"  
+            data-bind="click: gotoYearList, ojComponent: {component:'ojButton', chroming: 'half', display: 'icons', icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}}">
+    </button>
+    <h4><span data-bind="text : selectedMakeModelYearName"></span> Models </h4>
+    <div class="demo-scroll-container">
+        <div id="masonryLayout" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+            <ul data-bind="foreach: dataSourceStyles">
+                <div class="demo-tile oj-masonrylayout-tile-2x2" data-bind="attr: {id: getTileId($index())}">
+                    <div class="demo-tile-content">
+                        <div class="demo-tile-front oj-panel oj-panel-alt2">
+                            <span data-bind="text: name"></span>
+                            <div> 
+                                <span data-bind="text: transmission.transmissionType"> </span>, 
+                                <span data-bind="text: engine.fuelType"> </span><br/> 
+                                <span data-bind="text: engine.horsepower"></span> hp <br/> 
+                                <span data-bind="text: drivenWheels"></span>,  
+                                <span data-bind="text: numOfDoors"></span> doors<br/><br/>
+                                <div data-bind="with: price">
+                                    Base MSPR : $<span data-bind="text: baseMSRP"></span>
+                                    Used TMV Retail : $<span data-bind="text: usedTmvRetail"></span>
+                                </div>                                
+                                 <br/>                                 
+                                <button id="fullPush" data-bind="ojComponent: {
+                                            component:'ojButton', label: 'Pictures',
+                                            chroming: 'half',
+                                            icons: {start:'oj-fwk-icon-caret-end oj-component-icon'}
+                                        }, click: showPictures($data)">
+                                </button>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div> 
 
+<div style="display:none" id="modalDialog1" title="" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',
+                                            rootAttributes: { style: 'width: 800px; height: 400px;'}}">
+    <div class="oj-dialog-body">
+        <div id="filmstrip-navdots-example">  
+            <div id="filmStripDiv" class="oj-panel">
+                <div id="filmStrip"  aria-label="Pictures" data-bind="ojComponent: {component: 'ojFilmStrip', arrowVisibility: 'hover'}">
+                  <!-- ko foreach: { data: pictures, as: 'picture' } -->
+                  <div class="oj-panel oj-panel-alt2">
+                    <img data-bind="attr:{src: picture}"/>
+                  </div>
+                  <!-- /ko -->
+                </div>                    
+            </div> <!-- end filmStripDiv -->
+        </div>          
+    </div>
+    <div class="oj-dialog-footer">
+       <button id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Close'}, click: closeDialog"> </button>
+    </div>
+</div>
 
 <script type="text/html" id="make_model_template">
     <li data-bind="attr: {id: 'item'+id}">
@@ -80,8 +110,17 @@ and open the template in the editor.
         <div class="oj-flex-bar">
             <div class="oj-flex-bar-middle oj-flex-bar">
                 <div class="oj-flex-bar-middle" style="font-weight: bold" data-bind="text: year"></div>
+            </div>  
+            <div class="oj-flex-bar-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
             </div>       
         </div>
     </li>
 </script>
+
+<script id="basemsrp" type="text/html">
+   Base MSPR : $<span data-bind="text: baseMSRP"></span>
+   Used TMV Retail : $<span data-bind="text: usedTmvRetail"></span>
+</script>
+
 

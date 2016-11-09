@@ -22,9 +22,103 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.demo-page3-hide, .demo-page2-hide, .demo-page1-hide {
+.demo-page4-hide, .demo-page3-hide, .demo-page2-hide, .demo-page1-hide {
     display: none;
 }
+
+
+    .demo-tile {
+      -webkit-perspective: 1500px;
+      perspective: 1500px;
+    }
+    
+    .demo-tile-content {
+      box-sizing: border-box;
+      font-weight: bold;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    
+    .demo-flip-forward .demo-tile-content,
+    .demo-flip-backward .demo-tile-content {
+      -webkit-transition: -webkit-transform .4s ease-in-out;
+      transition: transform .4s ease-in-out;
+    }
+    
+    html:not([dir="rtl"]) .demo-flip-forward .demo-tile-content,
+    html[dir="rtl"] .demo-flip-backward .demo-tile-content {
+      -webkit-transform: rotate3d(0, 1, 0, -180deg);
+      transform: rotate3d(0, 1, 0, -180deg);
+    }
+    
+    html:not([dir="rtl"]) .demo-flip-backward .demo-tile-content,
+    html[dir="rtl"] .demo-flip-forward .demo-tile-content,
+    .demo-flipped {
+      -webkit-transform: rotate3d(0, 1, 0, 180deg);
+      transform: rotate3d(0, 1, 0, 180deg);
+    }
+    
+    .demo-tile-front,
+    .demo-tile-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    
+    .demo-tile-back {
+      color: #333;
+    }
+    
+    .demo-front-flip-icon,
+    .demo-back-flip-icon {
+      width: 2.34rem;
+      height: 2.34rem;
+      line-height: 2.34rem;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    
+    html:not([dir="rtl"]) .demo-front-flip-icon,
+    html[dir="rtl"] .demo-back-flip-icon {
+      right: 0px;
+    }
+    
+    html:not([dir="rtl"]) .demo-back-flip-icon,
+    html[dir="rtl"] .demo-front-flip-icon {
+      left: 0px;
+    }
+
+    .demo-hidden {
+      display: none;
+    }
+    
+    .demo-scroll-container {
+      overflow: auto;
+    }
+    
+    .demo-filmstrip-item {
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      color: #333;
+      font-weight: normal;
+    }
+
 
 .demo-icon-font:before, .demo-icon-font-24:before {
   display: inline-block;
@@ -81,7 +175,7 @@
   height: 18px;
 }
 .demo-oracle-icon:before {
-  content: url("images/oracle_logo.svg");
+  content: url("images/car.PNG");
   display: inline;
 }
 /* Adds padding between logo and application name */

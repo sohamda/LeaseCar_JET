@@ -14,7 +14,7 @@ define(['ojs/ojcore', 'knockout', 'navigation', 'ojs/ojrouter', 'ojs/ojdialog',
       // Router setup
       self.router = oj.Router.rootInstance;
       self.router.configure({
-        'search': {label: 'Find A Car', isDefault: true},
+        'search': {label: 'Car Finder', isDefault: true},
         'leaseInfo': {label: 'Inbox'}
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -47,9 +47,9 @@ define(['ojs/ojcore', 'knockout', 'navigation', 'ojs/ojrouter', 'ojs/ojdialog',
 
       // Header
       // Application Name used in Branding Area
-      self.appName = ko.observable("Lease a Car");
+      self.appName = ko.observable("");
       // User Info used in Global Navigation area
-      self.userLogin = ko.observable("john.hancock@oracle.com");
+      self.userLogin = ko.observable("soham.dasgupta@capgemini.com");
       // Dropdown menu states
       self.menuItemSelect = function (event, ui) {
         switch (ui.item.attr("id")) {
@@ -67,11 +67,10 @@ define(['ojs/ojcore', 'knockout', 'navigation', 'ojs/ojrouter', 'ojs/ojdialog',
         this.linkTarget = linkTarget;
       }
       self.footerLinks = ko.observableArray([
-        new footerLink('About Oracle', 'aboutOracle', 'http://www.oracle.com/us/corporate/index.html#menu-about'),
-        new footerLink('Contact Us', 'contactUs', 'http://www.oracle.com/us/corporate/contact/index.html'),
-        new footerLink('Legal Notices', 'legalNotices', 'http://www.oracle.com/us/legal/index.html'),
-        new footerLink('Terms Of Use', 'termsOfUse', 'http://www.oracle.com/us/legal/terms/index.html'),
-        new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html')
+        new footerLink('About Oracle JET', 'aboutOracle', 'http://www.oracle.com/webfolder/technetwork/jet/index.html'),
+        new footerLink('About Capgemini', 'contactUs', 'https://www.nl.capgemini.com/'),
+        new footerLink('Code Base', 'codebase', 'https://github.com/sohamda/LeaseCar_JET'),
+        new footerLink('Who Am I', 'whoami', 'https://nl.linkedin.com/in/soham-dasgupta-91b75410'),
       ]);
     }
 
