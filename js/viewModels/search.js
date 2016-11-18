@@ -151,7 +151,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise',
         
         getTileId = function(index) {
           return 'tile' + (index + 1);
-        };      
+        };   
+        
+        getBaseMSRPPrice = function(data) {
+          if(data.price && data.price.baseMSRP) {
+              return 'Base MSPR : $' + data.price.baseMSRP;
+          }  
+          return '';
+        };
+        
+        getUsedTmvRetailPrice = function(data) {
+          if(data.price && data.price.usedTmvRetail) {
+              return 'Used TMV Retail : $' + data.price.usedTmvRetail;
+          }  
+          return '';
+        };
         
         showPictures = function(data) {   
             self.pictures.removeAll();

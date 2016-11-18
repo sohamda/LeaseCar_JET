@@ -52,10 +52,8 @@ and open the template in the editor.
                                 <span data-bind="text: engine.horsepower"></span> hp <br/> 
                                 <span data-bind="text: drivenWheels"></span>,  
                                 <span data-bind="text: numOfDoors"></span> doors<br/><br/>
-                                <div data-bind="with: price">
-                                    Base MSPR : $<span data-bind="text: baseMSRP"></span>
-                                    Used TMV Retail : $<span data-bind="text: usedTmvRetail"></span>
-                                </div>                                
+                                <span data-bind="text: getBaseMSRPPrice($data)"></span>
+                                <span data-bind="text: getUsedTmvRetailPrice($data)"></span>                                
                                  <br/>                                 
                                 <button id="fullPush" data-bind="ojComponent: {
                                             component:'ojButton', label: 'Pictures',
@@ -118,9 +116,5 @@ and open the template in the editor.
     </li>
 </script>
 
-<script id="basemsrp" type="text/html">
-   Base MSPR : $<span data-bind="text: baseMSRP"></span>
-   Used TMV Retail : $<span data-bind="text: usedTmvRetail"></span>
-</script>
 
 
